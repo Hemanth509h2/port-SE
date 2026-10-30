@@ -1,8 +1,8 @@
 import pg from 'pg';
 import bcrypt from 'bcryptjs';
 
-const raw = process.env.DATABASE_URL || process.env.DATABASE_URL_2;
-if (!raw) throw new Error('DATABASE_URL (or DATABASE_URL_2) is not set');
+const raw = process.env.DATABASE_URL_2;
+if (!raw) throw new Error('DATABASE_URL_2 is not set');
 
 // Strip libpq-only query params (channel_binding, pool_timeout, ...) and configure SSL explicitly.
 const url = new URL(raw);
