@@ -1,4 +1,6 @@
-import sanitizeHtml from 'sanitize-html';
+// sanitize-html is CommonJS but require()s the ESM-only htmlparser2, which Vercel's loader rejects
+// (ERR_REQUIRE_ESM). We use a pre-bundled ESM copy instead: regenerate with `npm run vendor:sanitize`.
+import sanitizeHtml from '../vendor/sanitize-html.js';
 
 // Rich text produced by the admin editor (contentEditable + formatting toolbar).
 const RICH = {

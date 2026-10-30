@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
-    "seed": "node scripts/seed.js"
+    "seed": "node scripts/seed.js",
+    "vendor:sanitize": "esbuild node_modules/sanitize-html/index.js --bundle --platform=node --format=esm --target=node20 --minify --legal-comments=eof --banner:js=\"import{createRequire as __cr}from'node:module';const require=__cr(import.meta.url);\" --outfile=src/vendor/sanitize-html.js"
   },
   "license": "ISC",
   "type": "module",
@@ -20,10 +21,11 @@
     "express": "^5.3.0",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.5.0",
-    "pg": "^8.23.1",
-    "sanitize-html": "^2.18.1"
+    "pg": "^8.23.1"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "esbuild": "^0.28.2",
+    "nodemon": "^3.1.14",
+    "sanitize-html": "^2.18.1"
   }
 }
