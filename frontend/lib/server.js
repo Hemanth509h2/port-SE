@@ -6,7 +6,11 @@ const BACKEND = process.env.BACKEND_URL || 'http://localhost:5000';
 export async function loadPage(slug) {
   const res = await fetch(`${BACKEND}/api/site/render/${encodeURIComponent(slug)}`, { cache: 'no-store' });
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`Backend responded ${res.status}`);
+  if (!res.ok) {
+    // Include the start of the body so Vercel logs show the backend's actual error (or an auth/login page).
+    const body = (await res.text().catch(() => '')).replace(/\s+/g, ' ').slice(0, 300);
+    throw new Error(`Backend responded ${res.status} from ${BACKEND}: ${body}`);
+  }
   return res.json();
 }
 
