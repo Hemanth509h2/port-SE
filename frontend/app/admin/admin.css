@@ -157,11 +157,9 @@ textarea.p-input { resize: vertical; }
 .editing .se-pic.se-selected { outline: 3px solid #2563eb; }
 .editing .se-pic.se-drop { outline: 3px dashed #E8590C; filter: brightness(.8); }
 .editing .se-pic-empty { display: grid; place-items: center; min-height: 140px; background: repeating-linear-gradient(45deg, #eef1f6, #eef1f6 10px, #e4e8ef 10px, #e4e8ef 20px); color: #5c6573; font-size: 13px; font-weight: 600; text-align: center; padding: 10px; }
-.editing .hero-bg .se-pic-empty { height: 100%; }
+.editing .hero-photo .se-pic-empty, .editing .app-img .se-pic-empty, .editing .gal-img .se-pic-empty { height: 100%; }
 .editing .logo-img.se-pic-empty { min-height: 0; height: 36px; width: 46px; font-size: 0; border-radius: 6px; }
 .editing .logo-img.se-pic-empty::after { content: '🖼'; font-size: 16px; }
-.editing .hero-shade { pointer-events: none; }
-.editing .hero-bg { z-index: 0; }
 
 .editing .se-link { position: relative; }
 .se-linkbtn { position: absolute; top: -12px; right: -10px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid #c9d3e6; background: #fff; font-size: 11px; cursor: pointer; display: none; place-items: center; z-index: 5; padding: 0; box-shadow: 0 2px 6px rgba(0,0,0,.15); }
@@ -209,4 +207,4 @@ textarea.p-input { resize: vertical; }
 .fcta-edit { position: relative; right: auto; bottom: auto; margin: 24px auto; animation: none; box-shadow: 0 6px 24px rgba(0,0,0,.12); border: 1px solid #e3e6eb; }
 
 /* applications: show each row's thumbnail while editing so every image can be changed */
-.editing .apps-img .se-pic-empty { height: 100%; }
+.editing .svc-img .se-pic-empty, .editing .proj-img .se-pic-empty { height: 100%; }

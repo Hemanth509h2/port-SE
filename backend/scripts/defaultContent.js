@@ -53,9 +53,9 @@ export function buildContent(img) {
       ink: '#16181B',
       muted: '#6B6E73',
       paper: '#FFFFFF',
-      headingFont: 'Inter Tight',
-      bodyFont: 'Inter',
-      radius: 14,
+      headingFont: 'Barlow',
+      bodyFont: 'Source Sans 3',
+      radius: 4,
     },
     announcement: {
       show: true,
@@ -83,7 +83,7 @@ export function buildContent(img) {
       whatsapp: '919876543210',
     },
     floatingCta: {
-      show: true,
+      show: false,
       title: 'Have a project in mind?',
       text: 'Call or WhatsApp us for a quote',
       cta: { label: 'Get a quote', href: '/#contact' },
@@ -240,7 +240,7 @@ export function buildContent(img) {
       {
         id: id('s'), type: 'intro', anchor: 'about', floats: [],
         label: 'About us',
-        lead: 'WE MAKE POLYCARBONATE ROOFS, DOMES, SKYLIGHTS AND STEEL STRUCTURES.',
+        lead: 'We make polycarbonate roofs, domes, skylights and steel structures.',
         text: 'Jobs range from a single car porch to a full factory shed. On each one we measure the site ourselves, work out the steel sizes, fabricate the frame in our workshop and send our own crew to fix it. We don\'t subcontract the installation.',
         image: img(2),
         caption: 'Curved entrance canopy · driveway',

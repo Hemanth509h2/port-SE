@@ -21,23 +21,26 @@ function Head({ s, p, center, children }) {
 function Hero({ s, p, ...rest }) {
   return (
     <Section s={s} p={p} {...rest} dark>
-      <div className="hero-bg">
-        <Pic p={`${p}.image`} v={s.image} className="cover" eager />
-        <div className="hero-shade" />
+      <div className="wrap hero-grid">
+        <div className="hero-copy">
+          <div className="hero-eyebrow">
+            <T p={`${p}.eyebrowLeft`} v={s.eyebrowLeft} />
+            <T p={`${p}.eyebrowRight`} v={s.eyebrowRight} />
+          </div>
+          <T as="p" className="hero-kicker" p={`${p}.kicker`} v={s.kicker} placeholder="Kicker" />
+          <T as="h1" className="hero-title" p={`${p}.title`} v={s.title} placeholder="Big headline" />
+          <T as="p" className="hero-text" p={`${p}.text`} v={s.text} />
+          <div className="btns">
+            <L p={`${p}.cta`} v={s.cta} className="btn btn-primary" />
+            <L p={`${p}.secondary`} v={s.secondary} className="btn btn-ghost" />
+          </div>
+        </div>
+        <div className="hero-photo">
+          <Pic p={`${p}.image`} v={s.image} className="cover" eager />
+        </div>
       </div>
-      <div className="wrap hero-inner">
-        <div className="hero-eyebrow">
-          <T p={`${p}.eyebrowLeft`} v={s.eyebrowLeft} />
-          <T p={`${p}.eyebrowRight`} v={s.eyebrowRight} />
-        </div>
-        <T as="p" className="hero-kicker" p={`${p}.kicker`} v={s.kicker} placeholder="Kicker" />
-        <T as="h1" className="hero-title" p={`${p}.title`} v={s.title} placeholder="Big headline" />
-        <T as="p" className="hero-text" p={`${p}.text`} v={s.text} />
-        <div className="btns">
-          <L p={`${p}.cta`} v={s.cta} className="btn btn-primary" />
-          <L p={`${p}.secondary`} v={s.secondary} className="btn btn-ghost" />
-        </div>
-        <div className="hero-stats">
+      <div className="hero-facts">
+        <div className="wrap hero-stats">
           {(s.stats || []).map((it, i) => (
             <Item key={it.id || i} list={`${p}.stats`} i={i} className="hero-stat">
               <T as="span" className="k" p={`${p}.stats.${i}.k`} v={it.k} />
@@ -55,15 +58,15 @@ function Intro({ s, p, ...rest }) {
   return (
     <Section s={s} p={p} {...rest}>
       <div className="wrap intro">
-        <div className="rv">
+        <figure className="intro-fig">
+          <Pic p={`${p}.image`} v={s.image} className="cover" />
+          <T as="figcaption" p={`${p}.caption`} v={s.caption} placeholder="Caption" />
+        </figure>
+        <div>
           <T as="p" className="label" p={`${p}.label`} v={s.label} />
           <T as="p" className="intro-lead" p={`${p}.lead`} v={s.lead} />
           <T as="div" className="intro-text" p={`${p}.text`} v={s.text} />
         </div>
-        <figure className="intro-fig rv">
-          <Pic p={`${p}.image`} v={s.image} className="cover" />
-          <T as="figcaption" p={`${p}.caption`} v={s.caption} placeholder="Caption" />
-        </figure>
       </div>
     </Section>
   );
@@ -74,9 +77,9 @@ function Features({ s, p, ...rest }) {
     <Section s={s} p={p} {...rest}>
       <div className="wrap">
         <Head s={s} p={p} />
-        <div className="grid4">
+        <div className="features">
           {(s.items || []).map((it, i) => (
-            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className="feature rv">
+            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className="feature">
               <T as="span" className="num" p={`${p}.items.${i}.num`} v={it.num} />
               <T as="h3" className="h3" p={`${p}.items.${i}.title`} v={it.title} />
               <T as="p" p={`${p}.items.${i}.text`} v={it.text} />
@@ -96,7 +99,7 @@ function Services({ s, p, ...rest }) {
         <Head s={s} p={p} />
         <div className="grid3">
           {(s.items || []).map((it, i) => (
-            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className="svc rv">
+            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className="svc">
               <div className="svc-img">
                 <Pic p={`${p}.items.${i}.image`} v={it.image} className="cover" />
               </div>
@@ -116,34 +119,19 @@ function Services({ s, p, ...rest }) {
 }
 
 function Applications({ s, p, ...rest }) {
-  const [active, setActive] = useState(0);
-  const items = s.items || [];
-  const cur = Math.min(active, Math.max(0, items.length - 1));
   return (
     <Section s={s} p={p} {...rest}>
       <div className="wrap">
         <Head s={s} p={p} />
         <div className="apps">
-          <ol className="apps-list">
-            {items.map((it, i) => (
-              <Item
-                key={it.id || i}
-                as="li"
-                list={`${p}.items`}
-                i={i}
-                className={cx('app', i === cur && 'on')}
-                onMouseEnter={() => setActive(i)}
-                onFocus={() => setActive(i)}
-              >
-                <span className="app-n">{String(i + 1).padStart(2, '0')}</span>
-                <T as="span" className="app-t" p={`${p}.items.${i}.title`} v={it.title} />
-                <span className="app-arrow">→</span>
-              </Item>
-            ))}
-          </ol>
-          <div className="apps-img">
-            {items[cur] && <Pic p={`${p}.items.${cur}.image`} v={items[cur].image} className="cover" />}
-          </div>
+          {(s.items || []).map((it, i) => (
+            <Item key={it.id || i} as="figure" list={`${p}.items`} i={i} className="app">
+              <div className="app-img">
+                <Pic p={`${p}.items.${i}.image`} v={it.image} className="cover" />
+              </div>
+              <T as="figcaption" p={`${p}.items.${i}.title`} v={it.title} />
+            </Item>
+          ))}
         </div>
         <AddItem list={`${p}.items`} items={s.items} label="Add application" />
       </div>
@@ -153,12 +141,12 @@ function Applications({ s, p, ...rest }) {
 
 function Stats({ s, p, ...rest }) {
   return (
-    <Section s={s} p={p} {...rest} dark>
+    <Section s={s} p={p} {...rest}>
       <div className="wrap">
         <Head s={s} p={p} />
-        <div className="grid4 stats">
+        <div className="stats">
           {(s.items || []).map((it, i) => (
-            <Item key={it.id || i} list={`${p}.items`} i={i} className="stat rv">
+            <Item key={it.id || i} list={`${p}.items`} i={i} className="stat">
               <T as="div" className="stat-v" p={`${p}.items.${i}.value`} v={it.value} />
               <T as="p" p={`${p}.items.${i}.text`} v={it.text} />
             </Item>
@@ -177,7 +165,7 @@ function Projects({ s, p, ...rest }) {
         <Head s={s} p={p} />
         <div className="projects">
           {(s.items || []).map((it, i) => (
-            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className={cx('proj rv', i % 2 && 'flip')}>
+            <Item key={it.id || i} as="article" list={`${p}.items`} i={i} className="proj">
               <figure className="proj-img">
                 <Pic p={`${p}.items.${i}.image`} v={it.image} className="cover" />
                 <T as="span" className="proj-fig" p={`${p}.items.${i}.fig`} v={it.fig} />
@@ -216,9 +204,9 @@ function Process({ s, p, ...rest }) {
     <Section s={s} p={p} {...rest}>
       <div className="wrap">
         <Head s={s} p={p} />
-        <ol className="grid4 steps">
+        <ol className="steps">
           {(s.items || []).map((it, i) => (
-            <Item key={it.id || i} as="li" list={`${p}.items`} i={i} className="step rv">
+            <Item key={it.id || i} as="li" list={`${p}.items`} i={i} className="step">
               <T as="span" className="num" p={`${p}.items.${i}.num`} v={it.num} />
               <T as="h3" className="h3" p={`${p}.items.${i}.title`} v={it.title} />
               <T as="p" p={`${p}.items.${i}.text`} v={it.text} />
@@ -239,10 +227,12 @@ function Gallery({ s, p, ...rest }) {
     <Section s={s} p={p} {...rest}>
       <div className="wrap">
         <Head s={s} p={p} />
-        <div className="masonry">
+        <div className="gal-grid">
           {items.map((it, i) => (
-            <Item key={it.id || i} as="figure" list={`${p}.items`} i={i} className="gal rv" onClick={() => !ed.editing && setOpen(i)}>
-              <Pic p={`${p}.items.${i}.image`} v={it.image} />
+            <Item key={it.id || i} as="figure" list={`${p}.items`} i={i} className="gal" onClick={() => !ed.editing && setOpen(i)}>
+              <div className="gal-img">
+                <Pic p={`${p}.items.${i}.image`} v={it.image} className="cover" />
+              </div>
               <T as="figcaption" p={`${p}.items.${i}.caption`} v={it.caption} placeholder="Caption" />
             </Item>
           ))}
@@ -323,7 +313,7 @@ function TextImage({ s, p, ...rest }) {
   return (
     <Section s={s} p={p} {...rest}>
       <div className={cx('wrap ti', s.variant === 'flip' && 'flip')}>
-        <div className="rv">
+        <div>
           <T as="p" className="label" p={`${p}.label`} v={s.label} />
           <T as="h2" className="h2" p={`${p}.title`} v={s.title} />
           <T as="div" className="rich" p={`${p}.text`} v={s.text} />
@@ -331,7 +321,7 @@ function TextImage({ s, p, ...rest }) {
             <L p={`${p}.cta`} v={s.cta} className="btn btn-dark" />
           </div>
         </div>
-        <div className="ti-img rv">
+        <div className="ti-img">
           <Pic p={`${p}.image`} v={s.image} className="cover" />
         </div>
       </div>

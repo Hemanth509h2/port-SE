@@ -1,5 +1,4 @@
 'use client';
-import { useEffect, useRef } from 'react';
 import { SECTIONS } from './sections';
 import { Header, Footer, FloatingCta } from './Chrome';
 import { useEdit } from '../edit/EditContext';
@@ -14,14 +13,14 @@ export function themeVars(t = {}) {
     '--ink': t.ink || '#16181B',
     '--muted': t.muted || '#6B6E73',
     '--paper': t.paper || '#FFFFFF',
-    '--radius': `${t.radius ?? 14}px`,
-    '--font-h': `'${t.headingFont || 'Inter Tight'}', system-ui, sans-serif`,
-    '--font-b': `'${t.bodyFont || 'Inter'}', system-ui, sans-serif`,
+    '--radius': `${t.radius ?? 4}px`,
+    '--font-h': `'${t.headingFont || 'Barlow'}', system-ui, sans-serif`,
+    '--font-b': `'${t.bodyFont || 'Source Sans 3'}', system-ui, sans-serif`,
   };
 }
 
 export function FontLink({ theme = {} }) {
-  const fonts = [...new Set([theme.headingFont || 'Inter Tight', theme.bodyFont || 'Inter'])];
+  const fonts = [...new Set([theme.headingFont || 'Barlow', theme.bodyFont || 'Source Sans 3'])];
   const href = `https://fonts.googleapis.com/css2?${fonts.map(fontParam).join('&')}&display=swap`;
   return <link rel="stylesheet" href={href} precedence="default" />;
 }
@@ -29,26 +28,12 @@ export function FontLink({ theme = {} }) {
 // Renders a whole page (header, sections, footer). Used by the public site and inside the admin editor.
 export default function SiteRenderer({ global: g, page }) {
   const ed = useEdit();
-  const root = useRef(null);
   const sections = page.sections || [];
-
-  // Scroll-reveal animation on the public site.
-  useEffect(() => {
-    if (ed.editing || !root.current) return;
-    const els = root.current.querySelectorAll('.rv:not(.in)');
-    if (!('IntersectionObserver' in window)) return els.forEach((el) => el.classList.add('in'));
-    const io = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('in'), io.unobserve(e.target))),
-      { rootMargin: '0px 0px -8% 0px' }
-    );
-    els.forEach((el) => io.observe(el));
-    return () => io.disconnect();
-  }, [ed.editing, page]);
 
   return (
     <>
       <FontLink theme={g.theme} />
-      <div ref={root} className={ed.editing ? 'site editing' : 'site js'} style={themeVars(g.theme)}>
+      <div className={ed.editing ? 'site editing' : 'site'} style={themeVars(g.theme)}>
         <div className="site-c">
           <Header g={g} />
           <main>

@@ -172,13 +172,13 @@ function ThemePanel({ doc, update }) {
       <h3 className="p-h">Fonts</h3>
       <label className="p-row col">
         <span>Headings</span>
-        <select value={t.headingFont || 'Inter Tight'} onChange={(e) => set('headingFont', e.target.value)} style={{ fontFamily: t.headingFont }}>
+        <select value={t.headingFont || 'Barlow'} onChange={(e) => set('headingFont', e.target.value)} style={{ fontFamily: t.headingFont }}>
           {FONTS.map((f) => <option key={f}>{f}</option>)}
         </select>
       </label>
       <label className="p-row col">
         <span>Body text</span>
-        <select value={t.bodyFont || 'Inter'} onChange={(e) => set('bodyFont', e.target.value)}>
+        <select value={t.bodyFont || 'Source Sans 3'} onChange={(e) => set('bodyFont', e.target.value)}>
           {FONTS.map((f) => <option key={f}>{f}</option>)}
         </select>
       </label>

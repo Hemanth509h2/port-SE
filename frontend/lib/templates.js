@@ -74,6 +74,6 @@ export function makeSection(type) {
 }
 
 export const FONTS = [
-  'Inter', 'Inter Tight', 'Manrope', 'Plus Jakarta Sans', 'DM Sans', 'Poppins', 'Montserrat', 'Outfit', 'Sora',
+  'Barlow', 'Source Sans 3', 'IBM Plex Sans', 'Noto Sans', 'Inter', 'Inter Tight', 'Manrope', 'Plus Jakarta Sans', 'DM Sans', 'Poppins', 'Montserrat', 'Outfit', 'Sora',
   'Space Grotesk', 'Archivo', 'Work Sans', 'Roboto', 'Lato', 'Open Sans', 'Playfair Display', 'Merriweather', 'Lora',
 ];
